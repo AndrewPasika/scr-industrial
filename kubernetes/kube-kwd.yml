@@ -1,0 +1,82 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kwd-service
+  labels:
+    app: kwd-service
+    tier: frontend
+spec:
+  type: "LoadBalancer"
+  ports:
+  - port: 30900
+    targetPort: 30900
+    nodePort: 30900
+    name: kwd
+  selector:
+    app: kwd-service
+    tier: frontend
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kwd-service
+  namespace: default
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kwd-service
+        tier: frontend
+    spec:
+      containers:
+      - name: kwd-service
+        image: registry.kaaiot.io:5000/kwd-service:0.1.0-SNAPSHOT # maybe change for kwd
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: kwd-port
+          initialDelaySeconds: 150
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: kwd-port
+          initialDelaySeconds: 1
+          periodSeconds: 1
+        volumeMounts:
+          - mountPath: /usr/src/kaa-dashboard/conf
+            name: kwd-conf-volume
+        resources:
+          requests:
+            memory: 350Mi
+          limits:
+            memory: 1Gi
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+        - name: EPR_HOST_PORT
+          value: "http://10.2.1.199:30750"
+        - name: CRED_HOST_PORT
+          value: "http://10.2.1.199:30730"
+        - name: EPTS_HOST_PORT
+          value: "http://10.2.1.199:30006/"
+        - name: SERVICE_INSTANCE_NAME
+          value: "kwd_instance_1"
+        - name: CONFIG_REPOSITORY_SERVICE_URL
+          value: "http://scr-service.default.svc.cluster.local:30770"
+        - name: KWD_ENABLE_CONFIG_SERVICE_BOOLEAN
+          value: "false" # true
+        - name: DEPENDENCY_SERVICES_WAIT_TIMEOUT_SEC
+          value: "60"
+        - name: JAVA_OPTIONS
+          value: -Xmx700m # do we need?
+        ports:
+        - name: kwd-port
+          containerPort: 30900
+      volumes:
+        - name: kwd-conf-volume
+          hostPath:
+            path: /usr/lib/kaa-web-dashboard/conf

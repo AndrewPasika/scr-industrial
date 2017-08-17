@@ -1,0 +1,80 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tsre-service
+  labels:
+    app: tsre-service
+    tier: backend
+spec:
+  type: "LoadBalancer"
+  ports:
+  - port: 30940
+    targetPort: 30940
+    nodePort: 30940
+    name: tsre
+  - port: 5005
+    targetPort: 5005
+    nodePort: 30941
+    name: debug
+  selector:
+    app: tsre-service
+    tier: backend
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: tsre-service
+  namespace: default
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tsre-service
+        tier: backend
+    spec:
+      containers:
+      - name: tsre-service
+        image: registry.kaaiot.io:5000/tsre-service:1.0.0-SNAPSHOT
+        imagePullPolicy: Always
+        terminationMessagePolicy: FallbackToLogsOnError
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: tsre-port
+          timeoutSeconds: 50
+          initialDelaySeconds: 1
+          periodSeconds: 1
+        volumeMounts:
+          - mountPath: /usr/lib/tsre-service/conf
+            name: tsre-conf-volume
+        resources:
+          requests:
+            memory: 350Mi
+          limits:
+            memory: 1Gi
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+        - name: NATS_HOST_PORT
+          value: nats://nats-service.default.svc.cluster.local:4222
+        - name: INSTANCE_NAME
+          value: tsre_instance_1
+        - name: EPR_INSTANCE_NAME
+          value: epr_instance_1
+        - name: EPTS_INSTANCE_NAME
+          value: epts_instance_1
+        - name: DEPENDENCY_SERVICES_WAIT_TIMEOUT_SEC
+          value: "120"    # -1 means unlimited timeout
+        - name: JAVA_OPTIONS
+          value: -Xmx700m
+        - name: CONFIG_REPOSITORY_SERVICE_URL
+          value: "http://scr-service.default.svc.cluster.local:30770"
+        ports:
+        - name: tsre-port
+          containerPort: 30940
+      volumes:
+        - name: tsre-conf-volume
+          hostPath:
+            path: /usr/lib/tsre-service/conf
