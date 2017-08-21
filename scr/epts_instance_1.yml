@@ -1,0 +1,57 @@
+applications:
+- name: environment
+  time-series:
+  - name: Temperature
+    value-field: temperature
+  - name: Humidity
+    value-field: humidity
+  - name: BatteryLevel
+    value-field: batteryLevel
+  - name: Pressure
+    value-field: pressure
+  versions:
+  - name: environment-ver-1
+    number: 1
+    timestamp:
+      path: "$.ts"
+      format: iso8601
+      fallback-strategy: fail
+    preprocessing:
+      extraction:
+        extract-all: true
+        fields:
+        - name: stub
+          path: "$.stub"
+- name: engine
+  time-series:
+  - name: Temperature
+    value-field: temperature
+    tag-fields: latitude, longitude
+  - name: Oil
+    value-field: oil
+    tag-fields: latitude, longitude
+  - name: Revolutions
+    value-field: revolutions
+    tag-fields: latitude, longitude
+  versions:
+  - name: engine-ver-1
+    number: 1
+    timestamp:
+      path: "$.t"
+      format: iso8601
+      fallback-strategy: fail
+    preprocessing:
+      extraction:
+        extract-all: true
+        fields:
+        - name: temperature
+          path: "$.tmp"
+        - name: oil
+          path: "$.oil"
+        - name: revolutions
+          path: "$.rev"
+
+dcx:
+ service:
+   instance:
+     name: dcx_instance_1

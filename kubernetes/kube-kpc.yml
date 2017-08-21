@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
       - name: kpc-service
-        image: registry.kaaiot.io:5000/kpc-service:1.0.0-SNAPSHOT
+        image: hub.kaaiot.io/kaaiot/kpc/kpc-service:1.0.0-SNAPSHOT
         terminationMessagePolicy: FallbackToLogsOnError
         imagePullPolicy: Always
         livenessProbe:

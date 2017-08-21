@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
       - name: cm-service
-        image: registry.kaaiot.io:5000/cm-service:1.0.0-SNAPSHOT
+        image: hub.kaaiot.io/kaaiot/cm/cm-service:1.0.0-SNAPSHOT
         imagePullPolicy: Always
         terminationMessagePolicy: FallbackToLogsOnError
         livenessProbe:
