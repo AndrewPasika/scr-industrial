@@ -67,11 +67,11 @@ spec:
         - name : PRIVATE_DNS_HOST
           value: "10.2.2.45" #cybervision dns
         - name: CONFIGURATION_REPOSITORY_URL
-          value: https://github.com/AndrewPasika/scr
+          value: https://gitlab.kaaiot.io/evangelism/solutions/industrial/blueprint/tree/master/scr
         - name: CONFIGURATION_REPOSITORY_USERNAME
-          value: ""
+          value: "webui-test"
         - name: CONFIGURATION_REPOSITORY_PASSWORD
-          value: ""
+          value: "webui-pass"
         - name: DEPENDENCY_SERVICES_WAIT_TIMEOUT_SEC
           value: "60"    # -1 means unlimited timeout
         - name: JMX_PORT
