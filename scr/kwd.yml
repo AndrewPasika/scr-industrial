@@ -45,6 +45,42 @@ dashboards:
         height: 500
         percentWidth: 100
         source: EPList
+      -
+        config:
+          applicationName: engine
+          baseUrl: api/v1
+          columns:
+            -
+              display: Token
+              path: token
+            -
+              display: Status
+              path: status
+            -
+              display: Created
+              path: createdDate
+            -
+              display: "Engine ID"
+              path: endpointId
+          displayTitle: true
+          generate: true
+          generateTimeout: 1000
+          generateTitle: "Generate new"
+          height: 500
+          itemLink:
+            parameters:
+              -
+                itemJsonPath: "widgetConfig.columns[3].display"
+                name: engine_id
+                type: path
+            path: "/engine/{engine_id}"
+          name: routerCredentials.json
+          service: API_CRED
+          source: credentialsList
+          title: Credentials
+        height: 500
+        percentWidth: 100
+        source: credentialsList
   -
     displayDescription: true
     displayTitle: true
@@ -191,39 +227,41 @@ dashboards:
         height: 500
         percentWidth: 100
         source: numericChart
-      - height: 500
-        percentWidth: 60
-        source: metadata
+      -
         config:
-          title: Rules
-          source: metadata
-          service: API_EPR
+          allEditable: true
+          allFields: true
           baseUrl: api/v1
+          fields:
+            -
+              dataType: string
+              displayName: "Rule name"
+              isEditable: false
+              path: metadata
+              regexName: .*
+              section: metadata
           height: 500
           name: routerDetailsMetadata.json
-          allFields: true
-          allEditable: true
-          fields:
-            - path: metadata
-              section: metadata
-              regexName: .*
-              displayName: Rule name
-              isEditable: false
-              dataType: string
+          service: API_EPR
+          source: metadata
+          title: Rules
+        height: 500
+        percentWidth: 60
+        source: metadata
   -
-    title: Environment
+    description: "Environment monitoring solution"
     displayTitle: true
+    displayDescription: true
     icons:
       default: router/grey.svg
       hover: router/hovered.svg
       selected: router/orange.svg
     isTopLevel: true
     path: /environment
+    title: Environment
     widgets:
       -
         config:
-          title: Devices
-          source: EPList
           applicationName: environment-ver-1
           baseUrl: api/v1
           columns:
@@ -247,75 +285,110 @@ dashboards:
             path: "/environment/{endpoint_id}"
           metadata: metadata
           service: API_EPR
+          source: EPList
+          title: Devices
         height: 500
         percentWidth: 100
         source: EPList
+      -
+        config:
+          applicationName: environment
+          baseUrl: api/v1
+          columns:
+            -
+              display: Token
+              path: token
+            -
+              display: Status
+              path: status
+            -
+              display: Created
+              path: createdDate
+            -
+              display: "Engine ID"
+              path: endpointId
+          displayTitle: true
+          generate: true
+          generateTimeout: 1000
+          generateTitle: "Generate new"
+          height: 500
+          itemLink:
+            parameters:
+              -
+                itemJsonPath: "widgetConfig.columns[3].display"
+                name: engine_id
+                type: path
+            path: "/engine/{engine_id}"
+          name: routerCredentials.json
+          service: API_CRED
+          source: credentialsList
+          title: Credentials
+        height: 500
+        percentWidth: 100
+        source: credentialsList
   -
-    title: Environment sensor
     displayTitle: true
-    path: "/environment/:id"
-    isTopLevel: false
     icons:
       default: router/grey.svg
       hover: router/hovered.svg
       selected: router/orange.svg
+    isTopLevel: false
+    path: "/environment/:id"
+    title: "Environment sensor"
     widgets:
       -
-        height: 350
-        percentWidth: 100
         config:
-          title: Metadata
-          source: metadata
-          service: API_EPR
-          baseUrl: api/v1
           allFields: true
+          baseUrl: api/v1
           fields:
             -
-              section: metadata
-              name: serial
+              dataType: string
               displayName: "Serial Number"
               isEditable: false
-              dataType: string
-            -
+              name: serial
               section: metadata
-              name: mac
+            -
+              dataType: string
               displayName: "MAC address"
               isEditable: false
-              dataType: string
-            -
+              name: mac
               section: metadata
-              name: lat
+            -
+              dataType: string
               displayName: Latitude
               isEditable: false
-              dataType: string
-            -
+              name: lat
               section: metadata
-              name: long
+            -
+              dataType: string
               displayName: Longitude
               isEditable: false
-              dataType: string
-            -
+              name: long
               section: metadata
-              name: fw_version
+            -
+              dataType: string
               displayName: "Firmware version"
               isEditable: false
-              dataType: string
-            -
+              name: fw_version
               section: metadata
-              name: hw_version
+            -
+              dataType: string
               displayName: "Hardware version"
               isEditable: false
-              dataType: string
+              name: hw_version
+              section: metadata
+          service: API_EPR
+          source: metadata
+          title: Metadata
+        height: 350
+        percentWidth: 100
       -
-        height: 500
-        percentWidth: 25
         config:
-          title: Temperature
-          displayTitle: true
           baseUrl: api/v1
           dataPath: value
           displayPostfix: °C
           displayScale: 1
+          displayTitle: true
           emptyQueriesMax: 0
           ranges:
             highCritical: 40
@@ -333,18 +406,18 @@ dashboards:
             -
               itemJsonPath: dashboardRouteParams.id
               name: epId
+          title: Temperature
           type: HorizontalArrow
           updateInterval: 0.5
-      -
         height: 500
         percentWidth: 25
+      -
         config:
-          title: Humidity
-          displayTitle: true
           baseUrl: api/v1
           dataPath: value
           displayPostfix: "%"
           displayScale: 0
+          displayTitle: true
           emptyQueriesMax: 0
           ranges:
             highCritical: 75
@@ -362,18 +435,18 @@ dashboards:
             -
               itemJsonPath: dashboardRouteParams.id
               name: epId
+          title: Humidity
           type: HorizontalArrow
           updateInterval: 0.5
-      -
         height: 500
         percentWidth: 25
+      -
         config:
-          title: Pressure
-          displayTitle: true
           baseUrl: api/v1
           dataPath: value
           displayPostfix: bar
           displayScale: 3
+          displayTitle: true
           emptyQueriesMax: 0
           ranges:
             highCritical: 1.1
@@ -391,18 +464,18 @@ dashboards:
             -
               itemJsonPath: dashboardRouteParams.id
               name: epId
+          title: Pressure
           type: HorizontalArrow
           updateInterval: 0.5
-      -
         height: 500
         percentWidth: 25
+      -
         config:
-          title: "Battery Level"
-          displayTitle: true
           baseUrl: api/v1
           dataPath: value
           displayPostfix: "%"
           displayScale: 0
+          displayTitle: true
           emptyQueriesMax: 3
           ranges:
             highCritical: 101
@@ -419,59 +492,60 @@ dashboards:
             -
               itemJsonPath: dashboardRouteParams.id
               name: epId
+          title: "Battery Level"
           type: HorizontalArrow
           updateInterval: 0.5
-      -
         height: 500
-        percentWidth: 100
+        percentWidth: 25
+      -
         config:
-          title: "Temperature, °C"
-          displayTitle: true
-          source: numericChart
           baseUrl: api/v1
           dataPath: value
+          displayTitle: true
           height: 500
           limit: 1000
           service: API_EPTS
+          source: numericChart
           timeSeriesName: Temperature
-      -
+          title: "Temperature, °C"
         height: 500
         percentWidth: 100
+      -
         config:
-          title: "Humidity, %"
-          source: numericChart
           baseUrl: api/v1
           dataPath: value
           displayTitle: true
           limit: 1000
           service: API_EPTS
+          source: numericChart
           timeSeriesName: Humidity
-      -
+          title: "Humidity, %"
         height: 500
         percentWidth: 100
+      -
         config:
-          title: "Pressure, bar"
-          displayTitle: true
           baseUrl: api/v1
           dataPath: value
+          displayTitle: true
           limit: 1000
           service: API_EPTS
           source: numericChart
           timeSeriesName: Pressure
-
-      -
+          title: "Pressure, bar"
         height: 500
         percentWidth: 100
+      -
         config:
-          title: "Battery level, %"
-          displayTitle: true
           baseUrl: api/v1
           dataPath: value
+          displayTitle: true
           limit: 1000
           service: API_EPTS
           source: numericChart
           timeSeriesName: BatteryLevel
-
+          title: "Battery level, %"
+        height: 500
+        percentWidth: 100
 info:
   logo: "http://some_path"
   theme: night
