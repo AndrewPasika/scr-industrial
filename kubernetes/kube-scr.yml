@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: scr-service
-        image: registry.kaaiot.io:5000/scr-service:1.0.0-SNAPSHOT
+        image: hub.kaaiot.io/kaaiot/scr/scr-service:1.0.0-SNAPSHOT
         terminationMessagePolicy: FallbackToLogsOnError
         imagePullPolicy: Always
         livenessProbe:

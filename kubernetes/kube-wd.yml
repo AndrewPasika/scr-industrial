@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: kwd-service
-        image: registry.kaaiot.io:5000/kwd-service:0.1.0-SNAPSHOT # maybe change for kwd
+        image: hub.kaaiot.io/kaaiot/wd/wd-service:0.1.0-SNAPSHOT
         imagePullPolicy: Always
         livenessProbe:
           httpGet:

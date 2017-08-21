@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: dcx-service
-        image: registry.kaaiot.io:5000/dcx-service:1.0.0-SNAPSHOT
+        image: hub.kaaiot.io/kaaiot/dcx/dcx-service:1.0.0-SNAPSHOT
         imagePullPolicy: Always
         terminationMessagePolicy: FallbackToLogsOnError
         livenessProbe:

@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: epts-service
-        image: registry.kaaiot.io:5000/epts-service:1.0.0-SNAPSHOT
+        image: hub.kaaiot.io/kaaiot/epts/epts-service:1.0.0-SNAPSHOT
         imagePullPolicy: Always
         terminationMessagePolicy: FallbackToLogsOnError
         volumeMounts:

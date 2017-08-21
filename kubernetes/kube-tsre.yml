@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - name: tsre-service
-        image: registry.kaaiot.io:5000/tsre-service:1.0.0-SNAPSHOT
+        image: hub.kaaiot.io/kaaiot/tsre/tsre-service:1.0.0-SNAPSHOT
         imagePullPolicy: Always
         terminationMessagePolicy: FallbackToLogsOnError
         readinessProbe:

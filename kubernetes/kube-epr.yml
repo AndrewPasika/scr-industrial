@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
       - name: epr-service
-        image: registry.kaaiot.io:5000/epr-service:1.0.0-SNAPSHOT
+        image: hub.kaaiot.io/kaaiot/epr/epr-service:1.0.0-SNAPSHOT
         terminationMessagePolicy: FallbackToLogsOnError
         imagePullPolicy: Always
         livenessProbe:
