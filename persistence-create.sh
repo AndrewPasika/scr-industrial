@@ -3,7 +3,7 @@
 # MariaDB for CM
 kubectl create -f kubernetes/mariadb/kube-pv.yml
 kubectl create -f kubernetes/mariadb/kube-pvc-mariadb.yml
-kubectl create -f kubernetes/mariadb/kube-mariadb.yml
+kubectl create -f kubernetes/mariadb/kube-mariadb-persistence.yml
 
 # Cassandra for EPTS
 kubectl create -f kubernetes/cassandra/kube-pv.yml

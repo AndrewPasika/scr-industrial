@@ -3,7 +3,7 @@
 # MariaDB for CM
 kubectl delete -f kubernetes/mariadb/kube-pv.yml
 kubectl delete -f kubernetes/mariadb/kube-pvc-mariadb.yml
-kubectl delete -f kubernetes/mariadb/kube-mariadb.yml
+kubectl delete -f kubernetes/mariadb/kube-mariadb-persistence.yml
 
 # Cassandra for EPTS
 kubectl delete -f kubernetes/cassandra/kube-pv.yml

@@ -130,7 +130,6 @@ dashboards:
           displayScale: 1
           displayTitle: true
           emptyQueriesMax: 0
-          name: sensorDetailsGaugeHorizontalArrow.json
           ranges:
             highCritical: 120
             highWarning: 115
@@ -142,7 +141,7 @@ dashboards:
           service: API_EPTS
           source: gauge
           timeSegment: 5
-          timeSeriesName: Temperature
+          timeSeriesName: EngineTemperature
           timeSeriesParams:
             -
               itemJsonPath: dashboardRouteParams.id
@@ -160,7 +159,6 @@ dashboards:
           displayScale: 2
           displayTitle: true
           emptyQueriesMax: 3
-          name: sensorDetailsGaugeRadialModern180Left.json
           ranges:
             highCritical: 6.3
             highWarning: 6.1
@@ -189,7 +187,6 @@ dashboards:
           displayTitle: true
           height: 500
           limit: 1000
-          name: sensorDetailsNumericTemperature.json
           service: API_EPTS
           source: numericChart
           timeSeriesName: Revolutions
@@ -204,10 +201,9 @@ dashboards:
           displayTitle: true
           height: 500
           limit: 1000
-          name: sensorDetailsNumericTemperature.json
           service: API_EPTS
           source: numericChart
-          timeSeriesName: Temperature
+          timeSeriesName: EngineTemperature
           title: "Temperature, °C"
         height: 500
         percentWidth: 100
@@ -219,7 +215,6 @@ dashboards:
           displayTitle: true
           height: 500
           limit: 1000
-          name: sensorDetailsNumericTemperature.json
           service: API_EPTS
           source: numericChart
           timeSeriesName: Oil

@@ -24,7 +24,7 @@ applications:
           path: "$.stub"
 - name: engine
   time-series:
-  - name: Temperature
+  - name: EngineTemperature
     value-field: temperature
     tag-fields: latitude, longitude
   - name: Oil
