@@ -6,7 +6,7 @@ applications:
     extensions:
     - name: dcx_instance_1
       endpointAware: true
-      name: epmx_instance_1
+    - name: epmx_instance_1
       endpointAware: true
 - name: engine
   versions:

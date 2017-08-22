@@ -95,7 +95,7 @@ spec:
         - name: CERTIFICATE_CM_VALIDATION
           value: "false"
         - name: CONFIG_REPOSITORY_SERVICE_URL
-          value: http://scr-service.default.svc.cluster.local:30770
+          value: "http://scr-service.default.svc.cluster.local:30770"
           # Point to the location of configuration for transport protocols such as MQTT or CoAP.
           # If variable is not specified or value is empty, the service will get default configurations in application-<protocol-name>.yml file.
         - name: APP_CONFIG_PATH

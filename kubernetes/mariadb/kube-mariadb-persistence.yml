@@ -46,6 +46,9 @@ spec:
         resources:
           requests:
             memory: 100Mi
+        volumeMounts:
+        - name: data-storage-volume
+          mountPath: "/var/lib/mysql"
         env:
         - name: GET_HOSTS_FROM
           value: dns
@@ -66,3 +69,7 @@ spec:
         ports:
         - name: clients-port
           containerPort: 3306
+      volumes:
+      - name: data-storage-volume
+        persistentVolumeClaim:
+          claimName: mariadb-claim
