@@ -74,13 +74,11 @@ dashboards:
                 name: engine_id
                 type: path
             path: "/engine/{engine_id}"
-          name: routerCredentials.json
           service: API_CRED
           source: credentialsList
           title: Credentials
         height: 500
         percentWidth: 100
-        source: credentialsList
   -
     displayDescription: true
     displayTitle: true
@@ -287,6 +285,7 @@ dashboards:
         source: EPList
       -
         config:
+          title: Credentials
           applicationName: environment
           baseUrl: api/v1
           columns:
@@ -300,7 +299,7 @@ dashboards:
               display: Created
               path: createdDate
             -
-              display: "Engine ID"
+              display: "Sensor ID"
               path: endpointId
           displayTitle: true
           generate: true
@@ -311,16 +310,13 @@ dashboards:
             parameters:
               -
                 itemJsonPath: "widgetConfig.columns[3].display"
-                name: engine_id
+                name: endpoint_id
                 type: path
-            path: "/engine/{engine_id}"
-          name: routerCredentials.json
-          service: API_CRED
+            path: "/environment/{endpoint_id}"
           source: credentialsList
-          title: Credentials
+          service: API_CRED
         height: 500
         percentWidth: 100
-        source: credentialsList
   -
     displayTitle: true
     icons:
