@@ -31,6 +31,8 @@ spec:
         tier: backend
     spec:
       containers:
+      imagePullSecrets:
+        - name: hub-deploy
       - name: epmx-service
         image: hub.kaaiot.io/kaaiot/epmx/epmx-service:1.0.0-SNAPSHOT
         imagePullPolicy: Always
