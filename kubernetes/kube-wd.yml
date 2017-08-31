@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: kwd-service
+  name: wd-service
   labels:
-    app: kwd-service
+    app: wd-service
     tier: frontend
 spec:
   type: "LoadBalancer"
@@ -12,45 +12,33 @@ spec:
   - port: 30900
     targetPort: 30900
     nodePort: 30900
-    name: kwd
+    name: wd
   selector:
-    app: kwd-service
+    app: wd-service
     tier: frontend
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: kwd-service
+  name: wd-service
   namespace: default
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: kwd-service
+        app: wd-service
         tier: frontend
     spec:
       imagePullSecrets:
         - name: hub-deploy
       containers:
-      - name: kwd-service
-        image: hub.kaaiot.io/kaaiot/wd/wd-service:0.1.0-SNAPSHOT
+      - name: wd-service
+        image: hub.kaaiot.io/kaaiot/wd/wd-service:1.0.0-SNAPSHOT
         imagePullPolicy: Always
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: kwd-port
-          initialDelaySeconds: 150
-          periodSeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: kwd-port
-          initialDelaySeconds: 1
-          periodSeconds: 1
         volumeMounts:
-          - mountPath: /usr/src/kaa-dashboard/conf
-            name: kwd-conf-volume
+          - mountPath: /usr/src/web-dashboard/conf
+            name: wd-conf-volume
         resources:
           requests:
             memory: 350Mi
@@ -59,26 +47,20 @@ spec:
         env:
         - name: GET_HOSTS_FROM
           value: dns
-        - name: EPR_HOST_PORT
-          value: "http://10.2.1.199:30750"
-        - name: CRED_HOST_PORT
-          value: "http://10.2.1.199:30730"
-        - name: EPTS_HOST_PORT
-          value: "http://10.2.1.199:30006/"
-        - name: SERVICE_INSTANCE_NAME
-          value: "kwd_instance_1"
         - name: CONFIG_REPOSITORY_SERVICE_URL
           value: "http://scr-service.default.svc.cluster.local:30770"
-        - name: KWD_ENABLE_CONFIG_SERVICE_BOOLEAN
-          value: "false" # true
+        - name: REPOSITORY_BRANCH_NAME
+          value: "master"
+        - name: NATS_HOST_PORT
+          value: nats://nats-service.default.svc.cluster.local:4222
+        - name: SERVICE_INSTANCE_NAME
+          value: "wd_instance_1"
         - name: DEPENDENCY_SERVICES_WAIT_TIMEOUT_SEC
           value: "60"
-        - name: JAVA_OPTIONS
-          value: -Xmx700m # do we need?
         ports:
-        - name: kwd-port
+        - name: wd-port
           containerPort: 30900
       volumes:
-        - name: kwd-conf-volume
+        - name: wd-conf-volume
           hostPath:
-            path: /usr/lib/kaa-web-dashboard/conf
+            path: /usr/lib/web-dashboard/conf
