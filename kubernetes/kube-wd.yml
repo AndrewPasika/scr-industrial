@@ -47,16 +47,10 @@ spec:
         env:
         - name: GET_HOSTS_FROM
           value: dns
-        - name: CM_HOST_PORT
-          value: ":30730"
-        - name: EPTS_HOST_PORT
-          value: ":30740"
-        - name: EPR_HOST_PORT
-          value: ":30750"
-        - name: ECR_HOST_PORT
-          value: ":30760"
         - name: CONFIG_REPOSITORY_SERVICE_URL
           value: "http://scr-service.default.svc.cluster.local:30770"
+        - name: REPOSITORY_BRANCH_NAME
+          value: "master"
         - name: NATS_HOST_PORT
           value: nats://nats-service.default.svc.cluster.local:4222
         - name: SERVICE_INSTANCE_NAME
