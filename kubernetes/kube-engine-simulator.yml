@@ -61,7 +61,7 @@ spec:
         - name: GET_HOSTS_FROM
           value: dns
         - name: INSTANCE_NAME
-          value: engine-simulator
+          value: engine_simulator
         - name: NATS_HOST_PORT
           value: nats://nats-service.default.svc.cluster.local:4222
         - name: DEPENDENCY_SERVICES_WAIT_TIMEOUT_SEC
@@ -71,9 +71,9 @@ spec:
         - name: ENDPOINT_TOKENS_PATH
           value: /usr/lib/engine-simulator-service/conf/app/endpoint-tokens.data
         - name: KPC_HOST_PORT
-          value: tcp://10.2.1.199:30720
-#        - name: CONFIG_REPOSITORY_SERVICE_URL
-#          value: "http://scr-service.default.svc.cluster.local:30770"
+          value: tcp://kpc-service.default.svc.cluster.local:1883
+        - name: CONFIG_REPOSITORY_SERVICE_URL
+         value: "http://scr-service.default.svc.cluster.local:30770"
         ports:
         - name: engine-port
           containerPort: 32700
