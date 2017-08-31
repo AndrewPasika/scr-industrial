@@ -1,0 +1,85 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: env-sensor-service
+  labels:
+    app: env-sensor-service
+    tier: backend
+spec:
+  type: "LoadBalancer"
+  ports:
+  - port: 32701
+    targetPort: 32701
+    nodePort: 32701
+    name: env-sensor
+  selector:
+    app: env-sensorr-service
+    tier: backend
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: env-sensor-service
+  namespace: default
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: env-sensor-service
+        tier: backend
+    spec:
+      imagePullSecrets:
+        - name: hub-deploy
+      containers:
+      - name: env-sensor-service
+        image: hub.kaaiot.io/evangelism/solutions/industrial/simulators/env-sensor/env-sensor-service:1.0.0-SNAPSHOT
+        imagePullPolicy: Always
+        terminationMessagePolicy: FallbackToLogsOnError
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: env-sensor-port
+          initialDelaySeconds: 150
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: env-sensor-port
+          initialDelaySeconds: 1
+          periodSeconds: 1
+        volumeMounts:
+          - mountPath: /usr/lib/env-sensor
+            name: env-sensor-volume
+        resources:
+          requests:
+            memory: 350Mi
+          limits:
+            memory: 1Gi
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+        - name: INSTANCE_NAME
+          value: env_sensor
+        - name: NATS_HOST_PORT
+          value: nats://nats-service.default.svc.cluster.local:4222
+        - name: KPC_HOST_PORT
+          value: tcp://kpc-service.default.svc.cluster.local:1883
+        - name: DEPENDENCY_SERVICES_WAIT_TIMEOUT_SEC
+          value: "60"
+        - name: JAVA_OPTIONS
+          value: -Xmx700m
+        - name: CONFIG_REPOSITORY_SERVICE_URL
+          value: "http://scr-service.default.svc.cluster.local:30770"
+        - name: SERVICE_CONFIG_PATH
+          value: /usr/lib/env-sensor/conf/service-config.yml
+        - name: ENDPOINTS_STORE
+          value: /usr/lib/env-sensor/endpoints_store.json
+        ports:
+        - name: env-sensor-port
+          containerPort: 32701
+      volumes:
+        - name: env-sensor-volume
+          hostPath:
+            path: /usr/lib/env-sensor

@@ -23,7 +23,9 @@ kubectl $1 -f kubernetes/kube-epmx.yml
 kubectl $1 -f kubernetes/kube-scr.yml
 kubectl $1 -f kubernetes/kube-tsre.yml
 kubectl $1 -f kubernetes/kube-wd.yml
+
 kubectl $1 -f kubernetes/kube-engine-simulator.yml
+kubectl $1 -f kubernetes/kube-env-sensor.yml
 
 echo -e '\nPods list:'
 echo "$(kubectl get pods)"
