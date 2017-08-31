@@ -1,0 +1,83 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: engine-simulator-service
+  labels:
+    app: engine-simulator-service
+    tier: backend
+spec:
+  type: "LoadBalancer"
+  ports:
+  - port: 32700
+    targetPort: 32700
+    nodePort: 32700
+    name: engine
+  selector:
+    app: engine-simulator-service
+    tier: backend
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: engine-simulator-service
+  namespace: default
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: engine-simulator-service
+        tier: backend
+    spec:
+      imagePullSecrets:
+        - name: hub-deploy
+      containers:
+      - name: engine-simulator-service
+        image: hub.kaaiot.io/evangelism/solutions/industrial/simulators/engine/engine-simulator-service:1.0.0-SNAPSHOT
+        imagePullPolicy: Always
+        terminationMessagePolicy: FallbackToLogsOnError
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: engine-port
+          initialDelaySeconds: 60
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: engine-port
+          initialDelaySeconds: 1
+          periodSeconds: 1
+        volumeMounts:
+          - mountPath: /usr/lib/engine-simulator-service/conf
+            name: engine-simulator-conf-volume
+        resources:
+          requests:
+            memory: 350Mi
+          limits:
+            memory: 1Gi
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+        - name: INSTANCE_NAME
+          value: engine_simulator
+        - name: NATS_HOST_PORT
+          value: nats://nats-service.default.svc.cluster.local:4222
+        - name: DEPENDENCY_SERVICES_WAIT_TIMEOUT_SEC
+          value: "60"
+        - name: JAVA_OPTIONS
+          value: -Xmx700m
+        - name: ENDPOINT_TOKENS_PATH
+          value: /usr/lib/engine-simulator-service/conf/app/endpoint-tokens.data
+        - name: KPC_HOST_PORT
+          value: tcp://kpc-service.default.svc.cluster.local:1883
+        - name: CONFIG_REPOSITORY_SERVICE_URL
+         value: "http://scr-service.default.svc.cluster.local:30770"
+        ports:
+        - name: engine-port
+          containerPort: 32700
+      volumes:
+        - name: engine-simulator-conf-volume
+          hostPath:
+            path: /usr/lib/engine-simulator-service/conf
