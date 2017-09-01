@@ -34,7 +34,7 @@ spec:
         - name: hub-deploy
       containers:
       - name: engine-simulator-service
-        image: hub.kaaiot.io/evangelism/solutions/industrial/simulators/engine/engine-simulator-service:1.0.0-SNAPSHOT
+        image: hub.kaaiot.io/evangelism/solutions/industrial/simulators/engine-simulator/engine-simulator-service:1.0.0-SNAPSHOT
         imagePullPolicy: Always
         terminationMessagePolicy: FallbackToLogsOnError
         livenessProbe:
@@ -50,8 +50,8 @@ spec:
           initialDelaySeconds: 1
           periodSeconds: 1
         volumeMounts:
-          - mountPath: /usr/lib/engine-simulator-service/conf
-            name: engine-simulator-conf-volume
+          - mountPath: /usr/lib/engine-simulator-service
+            name: engine-simulator-volume
         resources:
           requests:
             memory: 350Mi
@@ -69,15 +69,15 @@ spec:
         - name: JAVA_OPTIONS
           value: -Xmx700m
         - name: ENDPOINT_TOKENS_PATH
-          value: /usr/lib/engine-simulator-service/conf/app/endpoint-tokens.data
+          value: /usr/lib/engine-simulator-service/store/endpoint-tokens.data
         - name: KPC_HOST_PORT
           value: tcp://kpc-service.default.svc.cluster.local:1883
         - name: CONFIG_REPOSITORY_SERVICE_URL
-         value: "http://scr-service.default.svc.cluster.local:30770"
+          value: "http://scr-service.default.svc.cluster.local:30770"
         ports:
         - name: engine-port
           containerPort: 32700
       volumes:
-        - name: engine-simulator-conf-volume
+        - name: engine-simulator-volume
           hostPath:
-            path: /usr/lib/engine-simulator-service/conf
+            path: /usr/lib/engine-simulator-service
