@@ -1,0 +1,560 @@
+---
+common:
+  autoUpdate: 3000
+dashboards:
+  -
+    description: "Engine monitoring solution"
+    displayDescription: true
+    displayTitle: true
+    icons:
+      default: router/grey.svg
+      hover: router/hovered.svg
+      selected: router/orange.svg
+    isTopLevel: true
+    path: /engine
+    title: Engine
+    widgets:
+      -
+        config:
+          applicationName: engine-ver-1
+          baseUrl: api/v1
+          columns:
+            -
+              display: ID
+              path: endpointId
+            -
+              display: Created
+              path: createdDate
+          displayTitle: true
+          generate: true
+          generateTimeout: 1000
+          generateTitle: "Generate new"
+          height: 500
+          itemLink:
+            parameters:
+              -
+                itemJsonPath: "widgetConfig.columns[0].display"
+                name: engine_id
+                type: path
+            path: "/engine/{engine_id}"
+          metadata: metadata
+          name: sensorDevices.json
+          service: API_EPR
+          source: EPList
+          title: Devices
+        height: 500
+        percentWidth: 100
+        source: EPList
+      -
+        config:
+          applicationName: engine
+          baseUrl: api/v1
+          columns:
+            -
+              display: Token
+              path: token
+            -
+              display: Status
+              path: status
+            -
+              display: Created
+              path: createdDate
+            -
+              display: "Engine ID"
+              path: endpointId
+          displayTitle: true
+          generate: true
+          generateTimeout: 1000
+          generateTitle: "Generate new"
+          height: 500
+          itemLink:
+            parameters:
+              -
+                itemJsonPath: "widgetConfig.columns[3].display"
+                name: engine_id
+                type: path
+            path: "/engine/{engine_id}"
+          service: API_CRED
+          source: credentialsList
+          title: Credentials
+        height: 500
+        percentWidth: 100
+  -
+    displayDescription: true
+    displayTitle: true
+    icons:
+      default: router/grey.svg
+      hover: router/hovered.svg
+      selected: router/orange.svg
+    isTopLevel: false
+    path: "/engine/:id"
+    title: Engine
+    widgets:
+      -
+        config:
+          baseUrl: api/v1
+          dataPath: value
+          displayPostfix: rpm
+          displayScale: 0
+          displayTitle: true
+          emptyQueriesMax: 3
+          ranges:
+            highCritical: 3100
+            highWarning: 3050
+            lowCritical: 2850
+            lowWarning: 2950
+            max: 3500
+            min: 0
+            step: 500
+          service: API_EPTS
+          source: gauge
+          timeSegment: 5
+          timeSeriesName: Revolutions
+          timeSeriesParams:
+            -
+              itemJsonPath: dashboardRouteParams.id
+              name: endpointId
+          title: "Engine Revolutions"
+          skin: RadialModernBorder270
+          updateInterval: 0.5
+        height: 500
+        percentWidth: 33.33
+      -
+        config:
+          baseUrl: api/v1
+          dataPath: value
+          displayPostfix: °C
+          displayScale: 1
+          displayTitle: true
+          emptyQueriesMax: 0
+          ranges:
+            highCritical: 120
+            highWarning: 115
+            lowCritical: 0
+            lowWarning: 0
+            max: 200
+            min: 0
+            step: 20
+          service: API_EPTS
+          source: gauge
+          timeSegment: 5
+          timeSeriesName: EngineTemperature
+          timeSeriesParams:
+            -
+              itemJsonPath: dashboardRouteParams.id
+              name: endpointId
+          title: "Engine Temperature"
+          skin: HorizontalArrow
+          updateInterval: 0.5
+        height: 500
+        percentWidth: 33.33
+      -
+        config:
+          baseUrl: api/v1
+          dataPath: value
+          displayPostfix: bar
+          displayScale: 2
+          displayTitle: true
+          emptyQueriesMax: 3
+          ranges:
+            highCritical: 6.3
+            highWarning: 6.1
+            lowCritical: 2
+            lowWarning: 4
+            max: 8
+            min: 0
+            step: 1
+          service: API_EPTS
+          source: gauge
+          timeSegment: 5
+          timeSeriesName: Oil
+          timeSeriesParams:
+            -
+              itemJsonPath: dashboardRouteParams.id
+              name: endpointId
+          title: "Oil Pressure"
+          skin: RadialModern180Left
+          updateInterval: 0.5
+        height: 500
+        percentWidth: 33.33
+      -
+        height: 500
+        percentWidth: 100
+        config:
+          title: "Revolutions, rpm"
+          baseUrl: api/v1
+          displayTitle: true
+          limit: 1000
+          service: API_EPTS
+          source: multiSeriesChart
+          timeSeriesName: Revolutions
+          dataSource:
+            timeSeries:
+              name: Revolutions
+            endpoints: '${dashboard.id}'
+      -
+        height: 500
+        percentWidth: 100
+        config:
+          title: "Temperature, °C"
+          baseUrl: api/v1
+          displayTitle: true
+          limit: 1000
+          service: API_EPTS
+          source: multiSeriesChart
+          dataSource:
+            timeSeries:
+              name: EngineTemperature
+              displayName: Temperature
+            endpoints: '${dashboard.id}'
+      -
+        height: 500
+        percentWidth: 100
+        config:
+          title: "Oil, bar"
+          displayTitle: true
+          baseUrl: api/v1
+          limit: 1000
+          service: API_EPTS
+          source: multiSeriesChart
+          dataSource:
+            timeSeries:
+              name: Oil
+            endpoints: '${dashboard.id}'
+      -
+        config:
+          allEditable: true
+          allFields: true
+          baseUrl: api/v1
+          fields:
+            -
+              dataType: string
+              displayName: "Rule name"
+              isEditable: false
+              path: metadata
+              regexName: .*
+              section: metadata
+          height: 500
+          service: API_EPR
+          source: metadata
+          title: Rules
+        height: 500
+        percentWidth: 60
+        source: metadata
+  -
+    description: "Environment monitoring solution"
+    displayTitle: true
+    displayDescription: true
+    icons:
+      default: router/grey.svg
+      hover: router/hovered.svg
+      selected: router/orange.svg
+    isTopLevel: true
+    path: /environment
+    title: Environment
+    widgets:
+      -
+        config:
+          applicationName: environment-ver-1
+          baseUrl: api/v1
+          columns:
+            -
+              display: ID
+              path: endpointId
+            -
+              display: Created
+              path: createdDate
+          displayTitle: true
+          generate: true
+          generateTimeout: 1000
+          generateTitle: "Generate new"
+          height: 500
+          itemLink:
+            parameters:
+              -
+                itemJsonPath: "widgetConfig.columns[0].display"
+                name: endpoint_id
+                type: path
+            path: "/environment/{endpoint_id}"
+          metadata: metadata
+          service: API_EPR
+          source: EPList
+          title: Devices
+        height: 500
+        percentWidth: 100
+        source: EPList
+      -
+        config:
+          title: Credentials
+          applicationName: environment
+          baseUrl: api/v1
+          columns:
+            -
+              display: Token
+              path: token
+            -
+              display: Status
+              path: status
+            -
+              display: Created
+              path: createdDate
+            -
+              display: "Sensor ID"
+              path: endpointId
+          displayTitle: true
+          generate: true
+          generateTimeout: 1000
+          generateTitle: "Generate new"
+          height: 500
+          itemLink:
+            parameters:
+              -
+                itemJsonPath: "widgetConfig.columns[3].display"
+                name: endpoint_id
+                type: path
+            path: "/environment/{endpoint_id}"
+          source: credentialsList
+          service: API_CRED
+        height: 500
+        percentWidth: 100
+  -
+    displayTitle: true
+    icons:
+      default: router/grey.svg
+      hover: router/hovered.svg
+      selected: router/orange.svg
+    isTopLevel: false
+    path: "/environment/:id"
+    title: "Environment sensor"
+    widgets:
+      -
+        config:
+          allFields: true
+          baseUrl: api/v1
+          fields:
+            -
+              dataType: string
+              displayName: "Serial Number"
+              isEditable: false
+              name: serial
+              section: metadata
+            -
+              dataType: string
+              displayName: "MAC address"
+              isEditable: false
+              name: mac
+              section: metadata
+            -
+              dataType: string
+              displayName: "Location Name"
+              isEditable: false
+              name: location
+              section: metadata
+            -
+              dataType: string
+              displayName: Latitude
+              isEditable: false
+              name: latitude
+              section: metadata
+            -
+              dataType: string
+              displayName: Longitude
+              isEditable: false
+              name: longitude
+              section: metadata
+            -
+              dataType: string
+              displayName: "Firmware version"
+              isEditable: false
+              name: fwVersion
+              section: metadata
+            -
+              dataType: string
+              displayName: "Hardware version"
+              isEditable: false
+              name: hwVersion
+              section: metadata
+          service: API_EPR
+          source: metadata
+          title: Metadata
+        height: 350
+        percentWidth: 100
+      -
+        config:
+          baseUrl: api/v1
+          dataPath: value
+          displayPostfix: °C
+          displayScale: 1
+          displayTitle: true
+          emptyQueriesMax: 0
+          ranges:
+            highCritical: 40
+            highWarning: 30
+            lowCritical: 7
+            lowWarning: 15
+            max: 50
+            min: 0
+            step: 5
+          service: API_EPTS
+          source: gauge
+          timeSegment: 5
+          timeSeriesName: Temperature
+          timeSeriesParams:
+            -
+              itemJsonPath: dashboardRouteParams.id
+              name: endpointId
+          title: Temperature
+          skin: HorizontalArrow
+          updateInterval: 0.5
+        height: 500
+        percentWidth: 25
+      -
+        config:
+          baseUrl: api/v1
+          dataPath: value
+          displayPostfix: "%"
+          displayScale: 0
+          displayTitle: true
+          emptyQueriesMax: 0
+          ranges:
+            highCritical: 75
+            highWarning: 65
+            lowCritical: 20
+            lowWarning: 35
+            max: 100
+            min: 0
+            step: 10
+          service: API_EPTS
+          source: gauge
+          timeSegment: 5
+          timeSeriesName: Humidity
+          timeSeriesParams:
+            -
+              itemJsonPath: dashboardRouteParams.id
+              name: endpointId
+          title: Humidity
+          skin: HorizontalArrow
+          updateInterval: 0.5
+        height: 500
+        percentWidth: 25
+      -
+        config:
+          baseUrl: api/v1
+          dataPath: value
+          displayPostfix: bar
+          displayScale: 3
+          displayTitle: true
+          emptyQueriesMax: 0
+          ranges:
+            highCritical: 1.1
+            highWarning: 1.05
+            lowCritical: 0.9
+            lowWarning: 0.95
+            max: 1.2
+            min: 0.85
+            step: 0.05
+          service: API_EPTS
+          source: gauge
+          timeSegment: 5
+          timeSeriesName: Pressure
+          timeSeriesParams:
+            -
+              itemJsonPath: dashboardRouteParams.id
+              name: endpointId
+          title: Pressure
+          skin: HorizontalArrow
+          updateInterval: 0.5
+        height: 500
+        percentWidth: 25
+      -
+        config:
+          baseUrl: api/v1
+          dataPath: value
+          displayPostfix: "%"
+          displayScale: 0
+          displayTitle: true
+          emptyQueriesMax: 3
+          ranges:
+            highCritical: 101
+            lowCritical: 10
+            lowWarning: 20
+            max: 100
+            min: 0
+            step: 10
+          service: API_EPTS
+          source: gauge
+          timeSegment: 5
+          timeSeriesName: BatteryLevel
+          timeSeriesParams:
+            -
+              itemJsonPath: dashboardRouteParams.id
+              name: endpointId
+          title: "Battery Level"
+          skin: HorizontalArrow
+          updateInterval: 0.5
+        height: 500
+        percentWidth: 25
+      -
+        height: 500
+        percentWidth: 100
+        config:
+          title: "Temperature, °C"
+          displayTitle: true
+          baseUrl: api/v1
+          limit: 1000
+          service: API_EPTS
+          source: multiSeriesChart
+          dataSource:
+            showLast: 86400
+            timeSeries:
+              name: Temperature
+            endpoints: '${dashboard.id}'
+      -
+        height: 500
+        percentWidth: 100
+        config:
+          title: "Humidity, %"
+          displayTitle: true
+          baseUrl: api/v1
+          limit: 1000
+          service: API_EPTS
+          source: multiSeriesChart
+          dataSource:
+            showLast: 86400
+            timeSeries:
+              name: Humidity
+            endpoints: '${dashboard.id}'
+      -
+        height: 500
+        percentWidth: 100
+        config:
+          title: "Pressure, bar"
+          displayTitle: true
+          baseUrl: api/v1
+          limit: 1000
+          service: API_EPTS
+          source: multiSeriesChart
+          dataSource:
+            showLast: 86400
+            timeSeries:
+              name: Pressure
+            endpoints: '${dashboard.id}'
+      -
+        height: 500
+        percentWidth: 100
+        config:
+          title: "Battery level, %"
+          displayTitle: true
+          baseUrl: api/v1
+          limit: 1000
+          service: API_EPTS
+          source: multiSeriesChart
+          dataSource:
+            showLast: 86400
+            timeSeries:
+              name: BatteryLevel
+            endpoints: '${dashboard.id}'
+info:
+  logo: "http://some_path"
+  theme: night
+title: MyCompany

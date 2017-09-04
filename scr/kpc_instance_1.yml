@@ -1,0 +1,17 @@
+applications:
+- name: environment
+  versions:
+  - name: environment-ver-1
+    number: 1
+    extensions:
+    - name: dcx_instance_1
+      endpointAware: true
+    - name: epmx_instance_1
+      endpointAware: true
+- name: engine
+  versions:
+  - name: engine-ver-1
+    number: 1
+    extensions:
+    - name: dcx_instance_1
+      endpointAware: true

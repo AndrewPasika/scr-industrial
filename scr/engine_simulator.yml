@@ -1,0 +1,23 @@
+engine.simulator:
+  client:
+    id: mqtt-kp-client
+    endpoint:
+      count: 1
+    topic:
+      protocol-version: kp1
+      dcx-instance-name: dcx_instance_1
+      app-version-name: engine-ver-1
+
+simulator-data:
+    test-period-millis: 500
+    temperature:
+        base-temperature: 30
+        max-temperature: 110
+    rpm:
+        base-rpm: 500
+        max-rpm: 3000
+        min-stop-rpm: 60
+    oil-pressure:
+        base-oil-pressure: 2
+        max-oil-pressure: 6
+        threshold-rpm: 2000

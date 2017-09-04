@@ -1,0 +1,27 @@
+client:
+  id: mqtt-kp-client
+  call-frequency: 60
+  topic:
+    protocol-version: kp1
+    app-version-name: environment-ver-1
+    data-collection-extension:
+       name: dcx_instance_1
+       publish-data-path: "json"
+    metadata-extension:
+       name: epmx_instance_1
+       update-metadata-path: "update"
+
+
+simulator:
+  locations:
+  - name: "Kiev"
+    latitude: 50.431782
+    longitude: 30.516382
+  - name: "Tunis"
+    latitude: 36.862499
+    longitude: 10.195556
+  weather-data-source:
+    dark-sky:
+      base-url: "https://api.darksky.net/forecast"
+      auth-key: "31e8883f41aaae96632946842091b76a"
+      units: "si"
