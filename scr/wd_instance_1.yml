@@ -75,7 +75,6 @@ dashboards:
           itemLink:
             path: "/engine/{engine_id}"
             parameters:
-              -
                 name: engine_id
                 itemJsonPath: "widgetConfig.columns[3].display"
                 type: path
@@ -304,7 +303,6 @@ dashboards:
           height: 500
           itemLink:
             parameters:
-              -
                 itemJsonPath: "widgetConfig.columns[3].display"
                 name: endpoint_id
                 type: path
