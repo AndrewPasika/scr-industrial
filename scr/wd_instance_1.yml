@@ -1,8 +1,13 @@
 ---
+info:
+  logo: "http://some_path"
+  theme: night
+  title: KaaIoT
+
 common:
   autoUpdate: 3000
 dashboards:
-  -
+  - title: Engine
     description: "Engine monitoring solution"
     displayDescription: true
     displayTitle: true
@@ -12,43 +17,48 @@ dashboards:
       selected: router/orange.svg
     isTopLevel: true
     path: /engine
-    title: Engine
     widgets:
       -
-        config:
-          applicationName: engine-ver-1
-          baseUrl: api/v1
-          columns:
-            -
-              display: ID
-              path: endpointId
-            -
-              display: Created
-              path: createdDate
-          displayTitle: true
-          generate: true
-          generateTimeout: 1000
-          generateTitle: "Generate new"
-          height: 500
-          itemLink:
-            parameters:
-              -
-                itemJsonPath: "widgetConfig.columns[0].display"
-                name: engine_id
-                type: path
-            path: "/engine/{engine_id}"
-          metadata: metadata
-          name: sensorDevices.json
-          service: API_EPR
-          source: EPList
-          title: Devices
         height: 500
         percentWidth: 100
-        source: EPList
-      -
         config:
-          applicationName: engine
+          displayTitle: true
+          title: Engine list
+          service: API_EPR
           baseUrl: api/v1
+          metadata: metadata
+          generate: true
+          generateTitle: Generate new
+          generateTimeout: 1000
+          applicationName: engine
+          type: epList
+          width: 7
+          height: 500
+          columns:
+            -
+              path: endpointId
+              display: ID
+            -
+              path: createdDate
+              display: Created
+          itemLink:
+            path: "/engine/{engine_id}"
+            parameters:
+              itemJsonPath: "widgetConfig.columns[0].display"
+              name: engine_id
+      - height: 500
+        percentWidth: 100
+        config:
+          displayTitle: true
+          title: Credentials
+          service: API_CRED
+          baseUrl: api/v1
+          generate: true
+          generateTimeout: 1000
+          applicationName: engine
+          generateTitle: "Generate new"
+          type: credentialsList
+          height: 500
           columns:
             -
               display: Token
@@ -62,23 +72,13 @@ dashboards:
             -
               display: "Engine ID"
               path: endpointId
-          displayTitle: true
-          generate: true
-          generateTimeout: 1000
-          generateTitle: "Generate new"
-          height: 500
           itemLink:
+            path: "/engine/{engine_id}"
             parameters:
               -
-                itemJsonPath: "widgetConfig.columns[3].display"
                 name: engine_id
+                itemJsonPath: "widgetConfig.columns[3].display"
                 type: path
-            path: "/engine/{engine_id}"
-          service: API_CRED
-          source: credentialsList
-          title: Credentials
-        height: 500
-        percentWidth: 100
   -
     displayDescription: true
     displayTitle: true
@@ -107,7 +107,7 @@ dashboards:
             min: 0
             step: 500
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: Revolutions
           timeSeriesParams:
@@ -136,7 +136,7 @@ dashboards:
             min: 0
             step: 20
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: EngineTemperature
           timeSeriesParams:
@@ -165,7 +165,7 @@ dashboards:
             min: 0
             step: 1
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: Oil
           timeSeriesParams:
@@ -186,7 +186,7 @@ dashboards:
           displayTitle: true
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           timeSeriesName: Revolutions
           dataSource:
             timeSeries:
@@ -201,7 +201,7 @@ dashboards:
           displayTitle: true
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             timeSeries:
               name: EngineTemperature
@@ -216,7 +216,7 @@ dashboards:
           baseUrl: api/v1
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             timeSeries:
               name: Oil
@@ -236,11 +236,10 @@ dashboards:
               section: metadata
           height: 500
           service: API_EPR
-          source: metadata
+          type: metadata
           title: Rules
         height: 500
         percentWidth: 60
-        source: metadata
   -
     description: "Environment monitoring solution"
     displayTitle: true
@@ -254,9 +253,19 @@ dashboards:
     title: Environment
     widgets:
       -
+        height: 500
+        percentWidth: 100
         config:
-          applicationName: environment-ver-1
+          displayTitle: true
+          title: Sensors list
+          applicationName: environment
+          service: API_EPR
+          generate: true
+          generateTitle: Generate new
+          generateTimeout: 1000
           baseUrl: api/v1
+          type: epList
+          height: 500
           columns:
             -
               display: ID
@@ -264,25 +273,12 @@ dashboards:
             -
               display: Created
               path: createdDate
-          displayTitle: true
-          generate: true
-          generateTimeout: 1000
-          generateTitle: "Generate new"
-          height: 500
           itemLink:
-            parameters:
-              -
-                itemJsonPath: "widgetConfig.columns[0].display"
-                name: endpoint_id
-                type: path
             path: "/environment/{endpoint_id}"
+            parameters:
+              itemJsonPath: "widgetConfig.columns[0].display"
+              name: endpoint_id
           metadata: metadata
-          service: API_EPR
-          source: EPList
-          title: Devices
-        height: 500
-        percentWidth: 100
-        source: EPList
       -
         config:
           title: Credentials
@@ -313,7 +309,7 @@ dashboards:
                 name: endpoint_id
                 type: path
             path: "/environment/{endpoint_id}"
-          source: credentialsList
+          type: credentialsList
           service: API_CRED
         height: 500
         percentWidth: 100
@@ -375,7 +371,7 @@ dashboards:
               name: hwVersion
               section: metadata
           service: API_EPR
-          source: metadata
+          type: metadata
           title: Metadata
         height: 350
         percentWidth: 100
@@ -396,7 +392,7 @@ dashboards:
             min: 0
             step: 5
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: Temperature
           timeSeriesParams:
@@ -425,7 +421,7 @@ dashboards:
             min: 0
             step: 10
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: Humidity
           timeSeriesParams:
@@ -454,7 +450,7 @@ dashboards:
             min: 0.85
             step: 0.05
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: Pressure
           timeSeriesParams:
@@ -482,7 +478,7 @@ dashboards:
             min: 0
             step: 10
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: BatteryLevel
           timeSeriesParams:
@@ -503,7 +499,7 @@ dashboards:
           baseUrl: api/v1
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             showLast: 86400
             timeSeries:
@@ -518,7 +514,7 @@ dashboards:
           baseUrl: api/v1
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             showLast: 86400
             timeSeries:
@@ -533,7 +529,7 @@ dashboards:
           baseUrl: api/v1
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             showLast: 86400
             timeSeries:
@@ -548,13 +544,9 @@ dashboards:
           baseUrl: api/v1
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             showLast: 86400
             timeSeries:
               name: BatteryLevel
             endpoints: '${dashboard.id}'
-info:
-  logo: "http://some_path"
-  theme: night
-title: MyCompany
