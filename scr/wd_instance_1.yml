@@ -40,11 +40,11 @@ dashboards:
           metadata: metadata
           name: sensorDevices.json
           service: API_EPR
-          source: EPList
+          type: EPList
           title: Devices
         height: 500
         percentWidth: 100
-        source: EPList
+        type: EPList
       -
         config:
           applicationName: engine
@@ -75,7 +75,7 @@ dashboards:
                 type: path
             path: "/engine/{engine_id}"
           service: API_CRED
-          source: credentialsList
+          type: credentialsList
           title: Credentials
         height: 500
         percentWidth: 100
@@ -107,7 +107,7 @@ dashboards:
             min: 0
             step: 500
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: Revolutions
           timeSeriesParams:
@@ -136,7 +136,7 @@ dashboards:
             min: 0
             step: 20
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: EngineTemperature
           timeSeriesParams:
@@ -165,7 +165,7 @@ dashboards:
             min: 0
             step: 1
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: Oil
           timeSeriesParams:
@@ -186,7 +186,7 @@ dashboards:
           displayTitle: true
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           timeSeriesName: Revolutions
           dataSource:
             timeSeries:
@@ -201,7 +201,7 @@ dashboards:
           displayTitle: true
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             timeSeries:
               name: EngineTemperature
@@ -216,7 +216,7 @@ dashboards:
           baseUrl: api/v1
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             timeSeries:
               name: Oil
@@ -236,11 +236,10 @@ dashboards:
               section: metadata
           height: 500
           service: API_EPR
-          source: metadata
+          type: metadata
           title: Rules
         height: 500
         percentWidth: 60
-        source: metadata
   -
     description: "Environment monitoring solution"
     displayTitle: true
@@ -278,11 +277,10 @@ dashboards:
             path: "/environment/{endpoint_id}"
           metadata: metadata
           service: API_EPR
-          source: EPList
+          type: EPList
           title: Devices
         height: 500
         percentWidth: 100
-        source: EPList
       -
         config:
           title: Credentials
@@ -313,7 +311,7 @@ dashboards:
                 name: endpoint_id
                 type: path
             path: "/environment/{endpoint_id}"
-          source: credentialsList
+          type: credentialsList
           service: API_CRED
         height: 500
         percentWidth: 100
@@ -375,7 +373,7 @@ dashboards:
               name: hwVersion
               section: metadata
           service: API_EPR
-          source: metadata
+          type: metadata
           title: Metadata
         height: 350
         percentWidth: 100
@@ -396,7 +394,7 @@ dashboards:
             min: 0
             step: 5
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: Temperature
           timeSeriesParams:
@@ -425,7 +423,7 @@ dashboards:
             min: 0
             step: 10
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: Humidity
           timeSeriesParams:
@@ -454,7 +452,7 @@ dashboards:
             min: 0.85
             step: 0.05
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: Pressure
           timeSeriesParams:
@@ -482,7 +480,7 @@ dashboards:
             min: 0
             step: 10
           service: API_EPTS
-          source: gauge
+          type: gauge
           timeSegment: 5
           timeSeriesName: BatteryLevel
           timeSeriesParams:
@@ -503,7 +501,7 @@ dashboards:
           baseUrl: api/v1
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             showLast: 86400
             timeSeries:
@@ -518,7 +516,7 @@ dashboards:
           baseUrl: api/v1
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             showLast: 86400
             timeSeries:
@@ -533,7 +531,7 @@ dashboards:
           baseUrl: api/v1
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             showLast: 86400
             timeSeries:
@@ -548,7 +546,7 @@ dashboards:
           baseUrl: api/v1
           limit: 1000
           service: API_EPTS
-          source: multiSeriesChart
+          type: multiSeriesChart
           dataSource:
             showLast: 86400
             timeSeries:
