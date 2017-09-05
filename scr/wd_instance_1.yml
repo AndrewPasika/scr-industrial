@@ -44,7 +44,6 @@ dashboards:
           title: Devices
         height: 500
         percentWidth: 100
-        type: EPList
       -
         config:
           applicationName: engine
