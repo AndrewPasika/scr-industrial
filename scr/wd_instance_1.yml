@@ -1,8 +1,13 @@
 ---
+info:
+  logo: "http://some_path"
+  theme: night
+  title: KaaIoT
+
 common:
   autoUpdate: 3000
 dashboards:
-  -
+  - title: Engine
     description: "Engine monitoring solution"
     displayDescription: true
     displayTitle: true
@@ -12,42 +17,48 @@ dashboards:
       selected: router/orange.svg
     isTopLevel: true
     path: /engine
-    title: Engine
     widgets:
       -
-        config:
-          applicationName: engine-ver-1
-          baseUrl: api/v1
-          columns:
-            -
-              display: ID
-              path: endpointId
-            -
-              display: Created
-              path: createdDate
-          displayTitle: true
-          generate: true
-          generateTimeout: 1000
-          generateTitle: "Generate new"
-          height: 500
-          itemLink:
-            parameters:
-              -
-                itemJsonPath: "widgetConfig.columns[0].display"
-                name: engine_id
-                type: path
-            path: "/engine/{engine_id}"
-          metadata: metadata
-          name: sensorDevices.json
-          service: API_EPR
-          type: EPList
-          title: Devices
         height: 500
         percentWidth: 100
-      -
         config:
-          applicationName: engine
+          displayTitle: true
+          title: Engine list
+          service: API_EPR
           baseUrl: api/v1
+          metadata: metadata
+          generate: true
+          generateTitle: Generate new
+          generateTimeout: 1000
+          applicationName: engine
+          type: epList
+          width: 7
+          height: 500
+          columns:
+            -
+              path: endpointId
+              display: ID
+            -
+              path: createdDate
+              display: Created
+          itemLink:
+            path: "/engine/{engine_id}"
+            parameters:
+              itemJsonPath: "widgetConfig.columns[0].display"
+              name: engine_id
+      - height: 500
+        percentWidth: 100
+        config:
+          displayTitle: true
+          title: Credentials
+          service: API_CRED
+          baseUrl: api/v1
+          generate: true
+          generateTimeout: 1000
+          applicationName: engine
+          generateTitle: "Generate new"
+          type: credentialsList
+          height: 500
           columns:
             -
               display: Token
@@ -61,23 +72,13 @@ dashboards:
             -
               display: "Engine ID"
               path: endpointId
-          displayTitle: true
-          generate: true
-          generateTimeout: 1000
-          generateTitle: "Generate new"
-          height: 500
           itemLink:
+            path: "/engine/{engine_id}"
             parameters:
               -
-                itemJsonPath: "widgetConfig.columns[3].display"
                 name: engine_id
+                itemJsonPath: "widgetConfig.columns[3].display"
                 type: path
-            path: "/engine/{engine_id}"
-          service: API_CRED
-          type: credentialsList
-          title: Credentials
-        height: 500
-        percentWidth: 100
   -
     displayDescription: true
     displayTitle: true
@@ -252,9 +253,19 @@ dashboards:
     title: Environment
     widgets:
       -
+        height: 500
+        percentWidth: 100
         config:
-          applicationName: environment-ver-1
+          displayTitle: true
+          title: Sensors list
+          applicationName: environment
+          service: API_EPR
+          generate: true
+          generateTitle: Generate new
+          generateTimeout: 1000
           baseUrl: api/v1
+          type: epList
+          height: 500
           columns:
             -
               display: ID
@@ -262,24 +273,12 @@ dashboards:
             -
               display: Created
               path: createdDate
-          displayTitle: true
-          generate: true
-          generateTimeout: 1000
-          generateTitle: "Generate new"
-          height: 500
           itemLink:
-            parameters:
-              -
-                itemJsonPath: "widgetConfig.columns[0].display"
-                name: endpoint_id
-                type: path
             path: "/environment/{endpoint_id}"
+            parameters:
+              itemJsonPath: "widgetConfig.columns[0].display"
+              name: endpoint_id
           metadata: metadata
-          service: API_EPR
-          type: EPList
-          title: Devices
-        height: 500
-        percentWidth: 100
       -
         config:
           title: Credentials
@@ -551,7 +550,3 @@ dashboards:
             timeSeries:
               name: BatteryLevel
             endpoints: '${dashboard.id}'
-info:
-  logo: "http://some_path"
-  theme: night
-title: MyCompany
