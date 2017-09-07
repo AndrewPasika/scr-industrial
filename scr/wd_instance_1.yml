@@ -255,6 +255,7 @@ dashboards:
         height: 500
         percentWidth: 100
         config:
+          type: epList
           displayTitle: true
           title: Sensors list
           applicationName: environment
@@ -263,12 +264,14 @@ dashboards:
           generateTitle: Generate new
           generateTimeout: 1000
           baseUrl: api/v1
-          type: epList
           height: 500
           columns:
             -
               display: ID
               path: endpointId
+            -
+              display: Location
+              path: metadata.location
             -
               display: Created
               path: createdDate
