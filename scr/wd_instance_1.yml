@@ -223,7 +223,7 @@ dashboards:
       -
         config:
           allEditable: true
-          allFields: true
+          allFields: false
           baseUrl: api/v1
           fields:
             -
