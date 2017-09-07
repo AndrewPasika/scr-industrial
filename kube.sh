@@ -27,7 +27,6 @@ function services_cmd {
   fi
 
   for service in ${services_list}; do
-    #echo -n "${cmd} ${service} ..."
     kubectl_cmd "${cmd}" "${service}"
     if [ $? -ne 0 ]; then
       echo "ERROR: Operation FAILED"
@@ -38,13 +37,14 @@ function services_cmd {
 }
 
 function usage {
-  echo "ERROR: Invalid command(s) provided"
   echo "Usage:"
   echo "$1 <command> [<service_file> [<service_file>] ...]"
   echo
   echo "where:"
   echo "<command>       One of the commands from list: list, create, delete, recreate"
   echo "  list          List all the services in the '${services_dir}' folder"
+  echo
+  echo "  status        Show kubernetes Pods status (equivalent to 'kubectl get pods')"
   echo
   echo "  create        Run kubectl create or delete command respectively"
   echo "  delete"
@@ -80,6 +80,7 @@ case "$cmd" in
     kubectl get pods
     ;;
   *)
+    echo "ERROR: Invalid command(s) provided"
     usage "$0"
     exit 1
     ;;
