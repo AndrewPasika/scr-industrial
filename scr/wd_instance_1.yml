@@ -331,6 +331,24 @@ dashboards:
               - 'f767b2ed-6614-4b11-abed-284c67ef5cb0'
         percentWidth: 50
         height: 500
+      - config:
+        height: 600
+        percentWidth: 100
+          urlTemplate: "https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicnNoY2hlcmJpbiIsImEiOiJjajQ4aGQ4d20waWpnMzRxem44bGVwOHRiIn0.iR9mHDK1XJmRwBhkYC_rbw"
+          title: Temperature in all rooms
+          endpointId: endpointId
+          baseUrl: api/v1
+          markerIcon: null
+          showDirection: true
+          POLLING_TIMEOUT: 10000
+          endpoints: "${dashboard.deviceId}"
+          historical: true
+          timeSeriesName: tsTemperature
+          displayTitle: true
+          type: EPLocation
+          service: API_EPTS
+          meta_service: API_EPR
+          percentWidth: 100
   -
     displayTitle: true
     icons:
