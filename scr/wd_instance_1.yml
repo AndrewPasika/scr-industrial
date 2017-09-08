@@ -314,6 +314,23 @@ dashboards:
           service: API_CRED
         height: 500
         percentWidth: 100
+      -
+        config:
+          displayTitle: true
+          title: "Temperature, °C"
+          type: multiSeriesChart
+          service: API_EPTS
+          baseUrl: api/v1
+          limit: 1000
+          dataSource:
+            timeSeries:
+              name: Temperature
+              displayName: Temperature
+            endpoints:
+              - '9c5e154d-2f04-42cc-9d1a-e01a97519b8b'
+              - 'f767b2ed-6614-4b11-abed-284c67ef5cb0'
+        percentWidth: 50
+        height: 500
   -
     displayTitle: true
     icons:
