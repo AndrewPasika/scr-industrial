@@ -131,7 +131,7 @@ dashboards:
             highWarning: 115
             lowCritical: 0
             lowWarning: 0
-            max: 200
+            max: 160
             min: 0
             step: 20
           service: API_EPTS
@@ -326,7 +326,7 @@ dashboards:
     widgets:
       -
         config:
-          allFields: true
+          allFields: false
           baseUrl: api/v1
           fields:
             -
