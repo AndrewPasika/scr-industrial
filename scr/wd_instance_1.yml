@@ -551,3 +551,17 @@ dashboards:
             timeSeries:
               name: BatteryLevel
             endpoints: '${dashboard.id}'
+    - title: Kaa Web Dashboard
+      displayTitle: false
+      description: Welcome to Kaa Web Dashboard!
+      displayDescription: false
+      path: /
+      isTopLevel: false
+      widgets:
+        - height: 500
+          percentWidth: 100
+          type: rawHTML
+          config:
+            content: null
+            type: rawHTML
+            transparent: true
