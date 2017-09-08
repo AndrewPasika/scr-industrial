@@ -2,7 +2,7 @@ engine.simulator:
   client:
     id: mqtt-engine-client
     endpoint:
-      tokens: "engine-1,engine-2"
+      tokens: "engine-1,engine-2,engine-47"
     topic:
       protocol-version: kp1
       dcx-instance-name: dcx_instance_1
