@@ -1,6 +1,6 @@
 engine.simulator:
   client:
-    id: mqtt-kp-client
+    id: mqtt-engine-client
     endpoint:
       tokens: "engine-1,engine-2"
     topic:

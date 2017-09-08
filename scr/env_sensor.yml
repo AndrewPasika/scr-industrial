@@ -1,5 +1,5 @@
 client:
-  id: mqtt-kp-client
+  id: mqtt-environment-client
   call-frequency: 60
   topic:
     protocol-version: kp1
