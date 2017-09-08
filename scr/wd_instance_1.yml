@@ -403,7 +403,7 @@ dashboards:
           title: Temperature
           skin: HorizontalArrow
           updateInterval: 0.5
-        height: 500
+        height: 300
         percentWidth: 25
       -
         config:
@@ -432,7 +432,7 @@ dashboards:
           title: Humidity
           skin: HorizontalArrow
           updateInterval: 0.5
-        height: 500
+        height: 300
         percentWidth: 25
       -
         config:
@@ -461,7 +461,7 @@ dashboards:
           title: Pressure
           skin: HorizontalArrow
           updateInterval: 0.5
-        height: 500
+        height: 300
         percentWidth: 25
       -
         config:
@@ -489,7 +489,7 @@ dashboards:
           title: "Battery Level"
           skin: HorizontalArrow
           updateInterval: 0.5
-        height: 500
+        height: 300
         percentWidth: 25
       -
         height: 500
