@@ -220,25 +220,52 @@ dashboards:
             timeSeries:
               name: Oil
             endpoints: '${dashboard.id}'
-      -
-        config:
-          allEditable: true
-          allFields: false
-          baseUrl: api/v1
-          fields:
-            -
-              dataType: string
-              displayName: "Rule name"
-              isEditable: false
-              path: metadata
-              regexName: .*
-              section: metadata
-          height: 500
-          service: API_EPR
-          type: metadata
-          title: Rules
+      - 
         height: 500
         percentWidth: 60
+        type: metadata
+        config:
+          title: Rules
+          type: metadata
+          service: API_EPR
+          baseUrl: api/v1
+          height: 500
+          allFields: true
+          allEditable: true
+          fields:
+            - path: metadata.Created
+              name: createdDate
+              displayName: Created at
+              isEditable: true
+              dataType: string
+            - path: metadata.areaID
+              displayName: Area ID
+              isEditable: false
+              dataType: string
+            - path: metadata.endpointId
+              name: endpointId
+              displayName: EndpointId
+              isEditable: false
+              dataType: string
+            - path: metadata.test
+              section: metadata
+              name: areaID
+              displayName: Area ID (1)
+              isEditable: true
+              dataType: number
+            - path: metadata.test1
+              section: metadata
+              name: areaID
+              displayName: Area ID (not shown)
+              isEditable: true
+              dataType: string
+            - path: metadata.test2
+              section: metadata
+              regexName: description-.*
+              displayName: Description (not shown)
+              isEditable: false
+              dataType: string
+
   -
     description: "Environment monitoring solution"
     displayTitle: true
