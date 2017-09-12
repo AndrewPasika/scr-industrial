@@ -264,6 +264,46 @@ dashboards:
     title: Environment
     widgets:
       -
+        height: 700
+        percentWidth: 100
+        config:
+          urlTemplate: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          title: Sensor locations
+          type: EPLocation
+          displayTitle: true
+          endpointId: endpointId
+          serviceName: API_EPR
+          serviceType: EPR
+          serviceMeta: API_EPR
+          applicationVersionName: environment-ver-1
+          baseUrl: api/v1
+          lat: metadata.latitude
+          lon: metadata.longitude
+          itemLink:
+            path: /environment/{endpoint_id}
+            parameters:
+              name: endpoint_id
+              itemJsonPath: widgetConfig.endpointId
+          markerCard:
+            - tag: "endpointId"
+              label: Name
+            - tag: "createdDate"
+              label: "Created at"
+            - tag: "metadata.location"
+              label: "Location"
+            - tag: "metadata.mac"
+              label: "Mac Adress"
+            - tag: "metadata.serial"
+              label: "Serial Number"
+          locationCard:
+            - tag: "endpointId"
+              label: Name
+            - tag: "createdDate"
+              label: "Created at"
+          markerIcon: null
+          POLLING_TIMEOUT: 10000
+          historical: false
+      -
         height: 500
         percentWidth: 100
         config:
