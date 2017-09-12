@@ -355,6 +355,7 @@ dashboards:
     widgets:
       -
         config:
+          allEditable: false
           allFields: false
           baseUrl: api/v1
           fields:
