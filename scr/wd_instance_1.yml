@@ -188,7 +188,7 @@ dashboards:
           type: multiSeriesChart
           timeSeriesName: Revolutions
           dataSource:
-            showLast: time period in seconds
+            showLast: 500
             timeSeries:
               name: Revolutions
             endpoints: '${dashboard.id}'
