@@ -322,6 +322,8 @@ dashboards:
               name: endpoint_id
           metadata: metadata
       -
+        height: 500
+        percentWidth: 100
         config:
           title: Credentials
           applicationName: environment
@@ -352,8 +354,6 @@ dashboards:
             path: "/environment/{endpoint_id}"
           type: credentialsList
           service: API_CRED
-        height: 500
-        percentWidth: 100
       -
         config:
           displayTitle: true
