@@ -267,6 +267,11 @@ dashboards:
           baseUrl: api/v1
           lat: metadata.latitude
           lon: metadata.longitude
+          itemLink:
+            path: /environment/{endpoint_id}                      
+            parameters:
+              name: endpoint_id
+              itemJsonPath: widgetConfig.endpointId
           markerCard:
             - tag: "endpointId"
               label: Name
