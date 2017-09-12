@@ -225,7 +225,7 @@ dashboards:
         percentWidth: 60
         type: metadata
         config:
-          title: Metadata
+          title: Rules
           type: metadata
           service: API_EPR
           baseUrl: api/v1
