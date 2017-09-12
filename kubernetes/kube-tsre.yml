@@ -13,10 +13,6 @@ spec:
     targetPort: 30940
     nodePort: 30940
     name: tsre
-  - port: 5005
-    targetPort: 5005
-    nodePort: 30941
-    name: debug
   selector:
     app: tsre-service
     tier: backend
