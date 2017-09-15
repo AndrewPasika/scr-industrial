@@ -234,23 +234,11 @@ dashboards:
           allFields: true
           allEditable: true
           fields:
-            - path: metadata.test
-              section: metadata
-              name: areaID
-              displayName: Area ID (1)
-              isEditable: true
-              dataType: number
-            - path: metadata.test1
-              section: metadata
-              name: areaID
-              displayName: Area ID (not shown)
-              isEditable: true
-              dataType: string
             - path: metadata
               section: metadata
               regexName: rule*
               displayName: Description (not shown)
-              isEditable: false
+              isEditable: true
               dataType: string
   -
     description: "Environment monitoring solution"
