@@ -218,6 +218,7 @@ dashboards:
           service: API_EPTS
           type: multiSeriesChart
           dataSource:
+            showLast: 3000
             timeSeries:
               name: Oil
             endpoints: '${dashboard.id}'
