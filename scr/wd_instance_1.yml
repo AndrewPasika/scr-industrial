@@ -234,12 +234,6 @@ dashboards:
           allFields: true
           allEditable: true
           fields:
-            - path: metadata.test
-              section: metadata
-              name: areaID
-              displayName: Area ID (1)
-              isEditable: true
-              dataType: number
             - path: metadata
               section: metadata
               regexName: rule*
