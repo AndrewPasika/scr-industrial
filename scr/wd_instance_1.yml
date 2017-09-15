@@ -236,7 +236,7 @@ dashboards:
           fields:
             - path: metadata
               section: metadata
-              regexName: .*-rule
+              regexName: \w*Rule
               displayName: Description (not shown)
               isEditable: true
               dataType: string
