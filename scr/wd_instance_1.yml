@@ -188,6 +188,7 @@ dashboards:
           type: multiSeriesChart
           timeSeriesName: Revolutions
           dataSource:
+            showLast: 3000
             timeSeries:
               name: Revolutions
             endpoints: '${dashboard.id}'
@@ -202,6 +203,7 @@ dashboards:
           service: API_EPTS
           type: multiSeriesChart
           dataSource:
+            showLast: 3000
             timeSeries:
               name: EngineTemperature
               displayName: Temperature
@@ -217,28 +219,28 @@ dashboards:
           service: API_EPTS
           type: multiSeriesChart
           dataSource:
+            showLast: 3000
             timeSeries:
               name: Oil
             endpoints: '${dashboard.id}'
       -
-        config:
-          allEditable: true
-          allFields: false
-          baseUrl: api/v1
-          fields:
-            -
-              dataType: string
-              displayName: "Rule name"
-              isEditable: false
-              path: metadata
-              regexName: .*
-              section: metadata
-          height: 500
-          service: API_EPR
-          type: metadata
-          title: Rules
         height: 500
         percentWidth: 60
+        type: metadata
+        config:
+          title: Rules
+          type: metadata
+          service: API_EPR
+          baseUrl: api/v1
+          height: 500
+          allFields: true
+          allEditable: true
+          fields:
+            - path: metadata
+              section: metadata
+              regexName: rule*
+              isEditable: true
+              dataType: string
   -
     description: "Environment monitoring solution"
     displayTitle: true
