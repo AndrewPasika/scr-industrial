@@ -37,12 +37,19 @@ spec:
         image: hub.kaaiot.io/kaaiot/tsre/tsre-service:1.0.0-SNAPSHOT
         imagePullPolicy: Always
         terminationMessagePolicy: FallbackToLogsOnError
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: tsre-port
+          timeoutSeconds: 50
+          initialDelaySeconds: 50
+          periodSeconds: 50
         readinessProbe:
           httpGet:
             path: /health
             port: tsre-port
           timeoutSeconds: 50
-          initialDelaySeconds: 1
+          initialDelaySeconds: 10
           periodSeconds: 1
         volumeMounts:
           - mountPath: /usr/lib/tsre-service/conf
