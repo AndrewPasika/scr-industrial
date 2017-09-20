@@ -49,8 +49,8 @@ spec:
             path: /health
             port: tsre-port
           timeoutSeconds: 50
-          initialDelaySeconds: 1
-          periodSeconds: 10
+          initialDelaySeconds: 10
+          periodSeconds: 1
         volumeMounts:
           - mountPath: /usr/lib/tsre-service/conf
             name: tsre-conf-volume
