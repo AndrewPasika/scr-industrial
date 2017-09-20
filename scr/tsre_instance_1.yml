@@ -1,21 +1,3 @@
-server:
-  port: 30940
-
-nats:
-  urls: nats://nats-service.default.svc.cluster.local:4222
-  username:
-  password:
-
-management.security.enabled: false
-
-endpoints:
-  enabled: false
-  health:
-    enabled: true
-    mapping.UNKNOWN: SERVICE_UNAVAILABLE
-  info.enabled: true
-  metrics.enabled: true
-
 spring:
   mail:
     host: mail.kaaiot.net
@@ -55,6 +37,3 @@ tsre:
           - Temperature
           - Revolutions
           - Oil
-
-logging:
-  config: classpath:spring-logback.xml
