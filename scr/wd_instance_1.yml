@@ -188,7 +188,7 @@ dashboards:
           type: multiSeriesChart
           timeSeriesName: Revolutions
           dataSource:
-            showLast: 3000
+            showLast: 600
             timeSeries:
               name: Revolutions
             endpoints: '${dashboard.id}'
@@ -203,7 +203,7 @@ dashboards:
           service: API_EPTS
           type: multiSeriesChart
           dataSource:
-            showLast: 3000
+            showLast: 600
             timeSeries:
               name: EngineTemperature
               displayName: Temperature
@@ -219,7 +219,7 @@ dashboards:
           service: API_EPTS
           type: multiSeriesChart
           dataSource:
-            showLast: 3000
+            showLast: 600
             timeSeries:
               name: Oil
             endpoints: '${dashboard.id}'
