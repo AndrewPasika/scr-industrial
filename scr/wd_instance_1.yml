@@ -317,6 +317,23 @@ dashboards:
         height: 500
         percentWidth: 100
       -
+        config:
+          displayTitle: true
+          title: "Temperature, °C"
+          type: multiSeriesChart
+          service: API_EPTS
+          baseUrl: api/v1
+          limit: 1000
+          dataSource:
+            timeSeries:
+              name: Temperature
+              displayName: Temperature
+            endpoints:
+              - '9938bdb9-9bee-4176-bf56-0d9a2bbbede1'
+              - 'cd031da8-ad80-428d-9e16-be2964f8b6a8'
+        percentWidth: 100
+        height: 500
+      -
         height: 600
         percentWidth: 100
         config:
@@ -356,23 +373,6 @@ dashboards:
           markerIcon: null
           POLLING_TIMEOUT: 10000
           historical: false
-      -
-        config:
-          displayTitle: true
-          title: "Temperature, °C"
-          type: multiSeriesChart
-          service: API_EPTS
-          baseUrl: api/v1
-          limit: 1000
-          dataSource:
-            timeSeries:
-              name: Temperature
-              displayName: Temperature
-            endpoints:
-              - '9938bdb9-9bee-4176-bf56-0d9a2bbbede1'
-              - 'cd031da8-ad80-428d-9e16-be2964f8b6a8'
-        percentWidth: 100
-        height: 500
   -
     displayTitle: true
     icons:
