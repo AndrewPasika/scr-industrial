@@ -334,7 +334,7 @@ dashboards:
         percentWidth: 100
         height: 500
       -
-        height: 600
+        height: 400
         percentWidth: 100
         config:
           urlTemplate: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
