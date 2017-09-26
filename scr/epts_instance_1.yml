@@ -19,7 +19,7 @@ applications:
     timestamp:
       path: "$.timestamp"
       format: mills-unix-epoch
-      fallback-strategy: fail
+      fallback-strategy: server-timestamp
     preprocessing:
       extraction:
         extract-all: true
