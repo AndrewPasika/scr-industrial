@@ -1,3 +1,9 @@
+kaa:
+  credential:
+    service:
+      instance:
+        name: cm_instance_1
+
 nats:
   urls: nats://nats-service.default.svc.cluster.local:4222
 
