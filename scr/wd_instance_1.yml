@@ -6,7 +6,6 @@ dashboards:
     description: "Engine monitoring solution"
     displayDescription: true
     displayTitle: true
-    sidebarTitle: Engine
     icons:
       default: router/grey.svg
       hover: router/hovered.svg
@@ -18,30 +17,26 @@ dashboards:
         height: 500
         percentWidth: 100
         config:
-          displayTitle: true
           title: Engine list
+          type: epList
+          displayTitle: true
+          applicationName: engine
           service: API_EPR
           baseUrl: api/v1
-          metadata: metadata
-          generate: true
-          generateTitle: Generate new
-          generateTimeout: 1000
-          applicationName: engine
-          type: epList
-          width: 7
           height: 500
           columns:
             -
-              path: endpointId
               display: ID
+              path: endpointId
             -
-              path: createdDate
               display: Created
+              path: createdDate
           itemLink:
             path: "/engine/{engine_id}"
             parameters:
               itemJsonPath: "widgetConfig.columns[0].display"
               name: engine_id
+          metadata: metadata
       - height: 500
         percentWidth: 100
         config:
