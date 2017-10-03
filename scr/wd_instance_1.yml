@@ -1,9 +1,4 @@
 ---
-info:
-  logo: "http://some_path"
-  theme: night
-  title: KaaIoT
-
 common:
   autoUpdate: 3000
 dashboards:
@@ -613,8 +608,10 @@ dashboards:
             timeSeries:
               name: BatteryLevel
             endpoints: '${dashboard.id}'
-  - title: Kaa Web Dashboard
-    displayTitle: false
+  -
+    id: 4c435d3e-90c2-420d-866c-ea410ad35da4
+    title: Kaa Web Dashboard
+    displayTitle: true
     description: Welcome to Kaa Web Dashboard!
     displayDescription: false
     path: /
@@ -627,3 +624,7 @@ dashboards:
           content: null
           type: rawHTML
           transparent: true
+info:
+  logo: "http://some_path"
+  theme: night
+  title: KaaIoT
